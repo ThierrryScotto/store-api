@@ -12,3 +12,7 @@ const createProduct = async (req, res) => {
 module.exports = {
   createProduct
 };
+
+// criar uma api que retorno o qr code se
+// salvar qr code na database
+// validações constra sql injection
