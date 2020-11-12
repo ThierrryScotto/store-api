@@ -5,8 +5,16 @@ const productModel = require('../../models/product.model');
 
 const createProduct = async (req, res) => {
   let { product, amount} = req.body;
-
-  const createdProduct = await productModel.create(product);
+  
+  try{
+    const createdProduct = await productModel.create(product);
+  
+    res.status(201).send(createdProduct);
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "internal error" })
+  }
 };
 
 module.exports = {
