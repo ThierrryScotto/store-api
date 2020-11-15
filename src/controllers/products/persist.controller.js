@@ -6,13 +6,28 @@ const { requestHandler } = require('../../helpers/request.helpers');
 // model
 const productModel = require('../../models/product.model');
 
-const createProduct = async (req, res) => {
-  let { product, amount} = req.body;
-  
-  try{
-    const imageQRcode = await requestHandler(product, res);
+// private
+const _validateRegisterBody = (body) => {
+  const registerSchema = {
+    'id'  : '/RegisterProduct',
+    'type': 'object',
+    'properties': {
+      'mark'   : { 'type': 'string' },
+      'size'   : { 'type': 'string' },
+      'color'  : { 'type': 'string' },
+      'price'  : { 'type': 'number' },
+      'ammount': { 'type': 'number' },
+    },
+    'required': ['mark', 'size', 'color', 'price', 'password', 'ammount']
+  };
+  return validator.validate(registerSchema, body);
+};
 
-    const createdProduct = await productModel.create(product);
+const createProduct = async (req, res) => {  
+  const postBody = _validateRegisterBody(req.body);
+
+  try{
+    const createdProduct = await productModel.create(postBody);
   
     res.status(201).send(createdProduct);
     
