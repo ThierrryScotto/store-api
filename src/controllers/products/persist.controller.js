@@ -1,7 +1,7 @@
 "use strict"
 
-// request
-const { requestHandler } = require('../../helpers/request.helpers');
+// dependencies 
+const { validate } = require('../../helpers/validate.helpers');
 
 // model
 const productModel = require('../../models/product.model');
@@ -18,9 +18,9 @@ const _validateRegisterBody = (body) => {
       'price'  : { 'type': 'number' },
       'ammount': { 'type': 'number' },
     },
-    'required': ['mark', 'size', 'color', 'price', 'password', 'ammount']
+    'required': ['mark', 'size', 'color', 'price', 'ammount']
   };
-  return validator.validate(registerSchema, body);
+  return validate(registerSchema, body);
 };
 
 const createProduct = async (req, res) => {  
@@ -41,6 +41,5 @@ module.exports = {
   createProduct
 };
 
-// criar uma api que retorno o qr code se
-// salvar qr code na database
-// validações contra sql injection
+// criar os testes
+// Ajustar o autenticador
