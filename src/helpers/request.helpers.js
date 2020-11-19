@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 // dependencies
 require('dotenv').config();
