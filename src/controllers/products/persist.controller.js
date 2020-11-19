@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 // dependencies 
 const { validate } = require('../../helpers/validate.helpers');
