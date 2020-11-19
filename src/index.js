@@ -12,6 +12,3 @@ const basePath = '/v1';
 
 router.express.use(`${basePath}`,  client);
 router.express.use(`${basePath}`,  products);
-
-// criar os testes 
-// fazer marge para dev e para master
