@@ -10,7 +10,7 @@ const productSchema = new Schema({
   size:      { type: String, required: true },
   color:     { type: String, required: true },
   price:     { type: Number, required: true },
-  status:    { type: Number, required: true },
+  status:    { type: Number, default: 1 },
   createdAt: { type: Date, default: Date.now }
 });
 
