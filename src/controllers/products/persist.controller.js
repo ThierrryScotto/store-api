@@ -68,7 +68,7 @@ const editProduct = async (req, res) => {
     const product = await productModel.findById({ _id: productId });
     
     if (!product) {
-      res.status(404).send({ message: `Product ${productId} not found` });
+      return res.status(404).send({ message: `Product ${productId} not found` });
     }
     
     product.name        = body.name        || product.name;
@@ -99,7 +99,7 @@ const editProduct = async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "internal error" })
+    return res.status(500).send({ message: "internal error" })
   }
 };
 
@@ -107,10 +107,10 @@ const deleteProduct = async (req, res) => {
   const { productId } = req.params;
 
   try {
-    const product = await productModel.findById({ _id: productId, status: 1 });
+    const product = await productModel.findById({ _id: productId }).where('status').equals('1');
 
     if (!product) {
-      res.status(404).send({ message: `Product ${productId} not found` })
+      return res.status(404).send({ message: `Product ${productId} not found` })
     }
 
     await productModel.updateOne({ _id: productId }, { status: 0 });
