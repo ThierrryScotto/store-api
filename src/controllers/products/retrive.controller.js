@@ -4,7 +4,7 @@
 const productModel = require('../../models/product.model');
 
 const getProducts = async (req, res) => {
-  const products = await productModel.find();
+  const products = await productModel.find({ status: 1 });
 
   if (products.length <= 0) {
     res.status(404).send({ message: 'Products not found' })
@@ -16,7 +16,7 @@ const getProducts = async (req, res) => {
 const getProductById = async (req, res) => {
   const { productId } = req.params;
 
-  const product = await productModel.findById({ _id: productId });
+  const product = await productModel.findById({ _id: productId, status: 1  });
 
   if (!product) {
     res.status(404).send({ message: `Product ${productId} not found` })
