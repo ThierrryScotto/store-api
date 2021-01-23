@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "local": "nodemon src/index.js",
-    "test": "mocha _test -t 10000 --exit"
+    "test": "mocha _test -t 10000 --exit",
+    "pm2": "pm2 start src/index.js "
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -18,6 +19,7 @@
     "jsonschema": "^1.4.0",
     "mongoose": "^5.10.13",
     "nodemon": "^2.0.6",
+    "pm2": "^4.5.1",
     "reqclient": "^2.4.0"
   }
 }
