@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "pm2 start src/index.js",
     "local": "nodemon src/index.js",
     "test": "mocha _test -t 10000 --exit",
     "pm2": "pm2 start src/index.js "

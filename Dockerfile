@@ -6,4 +6,4 @@ RUN npm install
 
 EXPOSE 3001 
 
-CMD ["npm", "run", "pm2"]
+CMD ["npm", "start"]   
