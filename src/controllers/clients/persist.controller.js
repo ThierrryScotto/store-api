@@ -9,6 +9,9 @@ const clientModel = require('../../models/clients.model');
 // JWT
 const { generateToken } = require('../../services/jwt');
 
+// helpers
+const validateDocument = require('../../helpers/validateDocument.helpers')
+
 // private
 const _validateRegisterBody = (body) => {
   const registerSchema = {
@@ -45,6 +48,12 @@ const createClients = async (req, res) => {
 
   try{
     postBody.dateOfBirth = new Date(postBody.dateOfBirth);
+
+    const documentIsValid = validateDocument(postBody.document);
+
+    if (!documentIsValid) {
+      return res.status(400).send({ message: `invalid document` });
+    }
     
     const createdClient = await clientModel.create(postBody);
 
