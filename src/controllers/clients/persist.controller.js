@@ -4,7 +4,7 @@
 const { validate } = require('../../helpers/validate.helpers');
 
 // model
-const clientModel = require('../../models/clients.model');
+const clientModel = require('../../models/client.model');
 
 // JWT
 const { generateToken } = require('../../services/jwt');
@@ -20,13 +20,14 @@ const _validateRegisterBody = (body) => {
     'properties'    : {
       'name'        : { 'type': 'string' },
       'password'    : { 'type': 'string' },
+      'email'    : { 'type': 'string' },
       'lastName'    : { 'type': 'string' },
       'document'    : { 'type': 'string' },
       'gender'      : { 'type': 'string' },
       'phoneNumber' : { 'type': 'string' },
       'dateOfBirth' : { 'type': 'string' }
     },
-    'required': ['name', 'lastName', 'document', 'gender', 'phoneNumber']
+    'required': ['name', 'lastName', 'document', 'gender', 'phoneNumber', 'email']
   };
   return validate(registerSchema, body);
 };
@@ -78,6 +79,7 @@ const editClients = async (req, res) => {
 
     clientFound.name        = body.name        || clientFound.name;
     clientFound.lastName    = body.lastName    || clientFound.lastName;
+    clientFound.email       = body.email    || clientFound.email;
     clientFound.password    = body.password    || clientFound.password;
     clientFound.document    = body.document    || clientFound.document;
     clientFound.gender      = body.gender      || clientFound.gender;
@@ -88,6 +90,7 @@ const editClients = async (req, res) => {
     clientFound.overwrite({ 
       name        : clientFound.name,
       password    : clientFound.password,
+      email       : clientFound.email,
       lastName    : clientFound.lastName,
       document    : clientFound.document, 
       gender      : clientFound.gender, 

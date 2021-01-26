@@ -1,7 +1,7 @@
 'use strict'
 
 // model
-const clientModel = require('../../models/clients.model');
+const clientModel = require('../../models/client.model');
 
 const getClients = async (req, res) => {
   const clientFound = await clientModel.find();
