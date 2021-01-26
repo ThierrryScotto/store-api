@@ -7,10 +7,13 @@ const express = require('./index');
 const orderPersistController = require("../controllers/orders/persist.controller");
 const orderRetriveController = require("../controllers/orders/retrive.controller");
 
-express.router.get('/orders/:orderId', orderRetriveController.getOrderById);
-express.router.get('/orders', orderRetriveController.getOrders);
-express.router.post('/orders', orderPersistController.createOrders);
-express.router.put('/orders/:orderId', orderPersistController.editOrders);
-express.router.delete('/orders/:orderId', orderPersistController.deleteOrders);
+// middleware
+const authMiddleware = require("../middleware/auth");
+
+express.router.get('/orders/:orderId', authMiddleware, orderRetriveController.getOrderById);
+express.router.get('/orders', authMiddleware, orderRetriveController.getOrders);
+express.router.post('/orders', authMiddleware, orderPersistController.createOrders);
+express.router.put('/orders/:orderId', authMiddleware, orderPersistController.editOrders);
+express.router.delete('/orders/:orderId', authMiddleware, orderPersistController.deleteOrders);
 
 module.exports = express.router;

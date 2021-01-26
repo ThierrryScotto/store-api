@@ -7,7 +7,7 @@ const getOrders = async (req, res) => {
   const ordersFound = await orderModel.find({ status: 1 });
 
   if (ordersFound.length <= 0) {
-    return res.status(404).send({ message: 'Order not found' }).where('status').equals('1');
+    return res.status(404).send({ message: 'Orders not found' }).where('status').equals('1');
   }
 
   res.status(200).send(ordersFound);

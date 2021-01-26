@@ -11,7 +11,7 @@ const orderSchema = new Schema({
   amount:    { type: Number, required: true },
   total:     { type: Number, required: true },
   status:    { type: Number, required: true },
-  updatedAt: { type: Date, required: true },
+  updatedAt: { type: Date },
   createdAt: { type: Date, default: Date.now }
 });
 
