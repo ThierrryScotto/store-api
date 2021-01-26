@@ -61,7 +61,7 @@ const createProduct = async (req, res) => {
   }
 };
 
-const editProduct = async (req, res) => {
+const editProducts = async (req, res) => {
   const { productId } = req.params;
   const body          = _validateEditBody(req.body);
   try {
@@ -103,7 +103,7 @@ const editProduct = async (req, res) => {
   }
 };
 
-const deleteProduct = async (req, res) => {
+const deleteProducts = async (req, res) => {
   const { productId } = req.params;
 
   try {
@@ -124,7 +124,7 @@ const deleteProduct = async (req, res) => {
 }
 
 module.exports = {
-  deleteProduct,
+  editProducts,
   createProduct,
-  editProduct
+  deleteProducts
 };
