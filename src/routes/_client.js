@@ -10,9 +10,9 @@ const clientRetriveController = require("../controllers/clients/retrive.controll
 // middleware
 const authMiddleware = require("../middleware/auth");
 
-express.router.post('/products', clientPersistController.createClients);
-express.router.put('/products/:productId', authMiddleware, clientPersistController.editClients);
-express.router.get('/products/:productId', authMiddleware, clientRetriveController.getClientstById);
-express.router.get('/products', authMiddlewarem, clientRetriveController.getClients);
+express.router.post('/clients', clientPersistController.createClients);
+express.router.put('/clients/:clientId', authMiddleware, clientPersistController.editClients);
+express.router.get('/clients/:clientId', authMiddleware, clientRetriveController.getClientstById);
+express.router.get('/clients', authMiddleware, clientRetriveController.getClients);
 
 module.exports = express.router;

@@ -4,10 +4,10 @@
 const clientModel = require('../../models/clients.model');
 
 const getClients = async (req, res) => {
-  const clientFound = await productModel.find({ status: 1 });
+  const clientFound = await clientModel.find();
 
   if (clientFound.length <= 0) {
-    return res.status(404).send({ message: 'Clients not found' }).where('status').equals('1');
+    return res.status(404).send({ message: 'Clients not found' });
   }
 
   res.status(200).send(clientFound);
@@ -16,7 +16,7 @@ const getClients = async (req, res) => {
 const getClientstById = async (req, res) => {
   const { clientId } = req.params;
 
-  const clientFound = await productModel.findById({ _id: clientId }).where('status').equals('1');
+  const clientFound = await clientModel.findById({ _id: clientId });
 
   if (!clientFound) {
     return res.status(404).send({ message: `Client ${clientId} not found` })

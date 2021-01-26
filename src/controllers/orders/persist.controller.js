@@ -5,7 +5,7 @@ const { validate } = require('../../helpers/validate.helpers');
 
 // model
 const ordersModel  = require('../../models/order.model');
-const clientModel  = require('../../models/client.model');
+const clientModel  = require('../../models/clients.model');
 const productModel = require('../../models/product.model');
 
 // private

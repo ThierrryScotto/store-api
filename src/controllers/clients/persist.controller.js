@@ -6,6 +6,9 @@ const { validate } = require('../../helpers/validate.helpers');
 // model
 const clientModel = require('../../models/clients.model');
 
+// JWT
+const { generateToken } = require('../../services/jwt');
+
 // private
 const _validateRegisterBody = (body) => {
   const registerSchema = {
@@ -13,11 +16,12 @@ const _validateRegisterBody = (body) => {
     'type': 'object',
     'properties'    : {
       'name'        : { 'type': 'string' },
+      'password'    : { 'type': 'string' },
       'lastName'    : { 'type': 'string' },
       'document'    : { 'type': 'string' },
       'gender'      : { 'type': 'string' },
       'phoneNumber' : { 'type': 'string' },
-      'dateOfBirth' : { 'type': 'object' }
+      'dateOfBirth' : { 'type': 'string' }
     },
     'required': ['name', 'lastName', 'document', 'gender', 'phoneNumber']
   };
@@ -40,10 +44,13 @@ const createClients = async (req, res) => {
   const postBody = _validateRegisterBody(req.body);
 
   try{
-    const createdClient = await clientModel.create(postBody);
-  
-    return res.status(201).send(createdClient);
+    postBody.dateOfBirth = new Date(postBody.dateOfBirth);
     
+    const createdClient = await clientModel.create(postBody);
+
+    const token = generateToken(createdClient._id);
+  
+    return res.status(201).send({ createdClient, token });    
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "internal error" })
@@ -52,24 +59,26 @@ const createClients = async (req, res) => {
 
 const editClients = async (req, res) => {
   const { clientId } = req.params;
-  const body          = _validateEditBody(req.body);
+  const body         = _validateEditBody(req.body);
   try {
     const clientFound = await clientModel.findById({ _id: clientId });
     
     if (!clientFound) {
       return res.status(404).send({ message: `Client ${clientId} not found` });
     }
-    
+
     clientFound.name        = body.name        || clientFound.name;
     clientFound.lastName    = body.lastName    || clientFound.lastName;
+    clientFound.password    = body.password    || clientFound.password;
     clientFound.document    = body.document    || clientFound.document;
     clientFound.gender      = body.gender      || clientFound.gender;
     clientFound.phoneNumber = body.phoneNumber || clientFound.phoneNumber;
-    clientFound.dateOfBirth = body.dateOfBirth || clientFound.dateOfBirth;
+    clientFound.dateOfBirth = body.dateOfBirth || new Date(clientFound.dateOfBirth);
     clientFound.updatedAt   = new Date();
-      
+    
     clientFound.overwrite({ 
       name        : clientFound.name,
+      password    : clientFound.password,
       lastName    : clientFound.lastName,
       document    : clientFound.document, 
       gender      : clientFound.gender, 
