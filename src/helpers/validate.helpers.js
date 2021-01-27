@@ -8,7 +8,7 @@ const validate = (schema, jsonObject) => {
   let validatorResult = validator.validate(jsonObject, schema);
 
   if (validatorResult.errors.length > 0) {
-    throw new Error("Body incorrect");
+    return new Error("Body incorrect");
   }
 
   return validatorResult.instance;
