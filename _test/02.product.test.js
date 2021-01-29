@@ -18,7 +18,7 @@ let body;
 
 const { product } = require('./populate/product.populate');
 
-describe('01 Test Case create a Products through endpoint products', () => {
+describe('2.1 Test Case create a Products through endpoint products', () => {
   it('Should create and return new Product', (done) => {
     chai.request(app)
       .post(basePath)
@@ -53,7 +53,7 @@ describe('01 Test Case create a Products through endpoint products', () => {
   });
 });
 
-describe('02 Test Case edit a Products through endpoint products/:productId', () => {
+describe('2.2 Test Case edit a Products through endpoint products/:productId', () => {
   it('Should edit and return Product', (done) => {
     chai.request(app)
       .put(`${basePath}/${product.body._id}`)
@@ -71,7 +71,7 @@ describe('02 Test Case edit a Products through endpoint products/:productId', ()
   });
 });
 
-describe('03 Test Case Get all Products through endpoint products', () => {
+describe('2.3 Test Case Get all Products through endpoint products', () => {
   it('Should retrive All the products registered', (done) => {
     chai.request(app)
       .get(basePath)
@@ -88,7 +88,7 @@ describe('03 Test Case Get all Products through endpoint products', () => {
   });
 });
 
-describe('04 Test Case Get Products by id through endpoint products/:productId', () => {
+describe('2.4 Test Case Get Products by id through endpoint products/:productId', () => {
   it('Should retrive Product by id', (done) => {
     chai.request(app)
       .get(`${basePath}/${product.body._id}`)
@@ -119,7 +119,7 @@ describe('04 Test Case Get Products by id through endpoint products/:productId',
   });
 });
 
-describe('05 Test Case delete a Products through endpoint products/:productId', () => {
+describe('2.5 Test Case delete a Products through endpoint products/:productId', () => {
   it('Should delete and return a notification', (done) => {
     chai.request(app)
       .delete(`${basePath}/${product.body._id}`)
