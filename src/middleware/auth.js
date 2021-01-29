@@ -1,8 +1,15 @@
 'use strict'
 
+// dependencies
+require('dotenv').config();
+
 const { verifyToken } = require('../services/jwt/index');
 
 module.exports = (req, res, next) => {
+  if (process.env.NODE_ENVIRONMENT === 'local') {
+    return next();
+  }
+
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
@@ -13,5 +20,5 @@ module.exports = (req, res, next) => {
     return res.status(401).send({ error: 'Invalid token' })
   }  
 
-  next();
+  return next();
 }

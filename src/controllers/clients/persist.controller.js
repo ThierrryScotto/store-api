@@ -62,7 +62,6 @@ const createClients = async (req, res) => {
   
     return res.status(201).send({ createdClient, token });    
   } catch (error) {
-    console.error(error);
     res.status(500).send({ message: "internal error" })
   }
 };
@@ -79,7 +78,7 @@ const editClients = async (req, res) => {
 
     clientFound.name        = body.name        || clientFound.name;
     clientFound.lastName    = body.lastName    || clientFound.lastName;
-    clientFound.email       = body.email    || clientFound.email;
+    clientFound.email       = body.email       || clientFound.email;
     clientFound.password    = body.password    || clientFound.password;
     clientFound.document    = body.document    || clientFound.document;
     clientFound.gender      = body.gender      || clientFound.gender;
@@ -87,7 +86,7 @@ const editClients = async (req, res) => {
     clientFound.dateOfBirth = body.dateOfBirth || new Date(clientFound.dateOfBirth);
     clientFound.updatedAt   = new Date();
     
-    clientFound.overwrite({ 
+    await clientFound.overwrite({ 
       name        : clientFound.name,
       password    : clientFound.password,
       email       : clientFound.email,
