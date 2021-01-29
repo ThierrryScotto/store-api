@@ -15,7 +15,7 @@ const basePath = '/v1/clients';
 
 const { client } = require('./populate/client.populate');
 
-describe('01 Test Case create a Client through endpoint client', () => {
+describe('1.0 Test Case create a Client through endpoint client', () => {
   it('Should create and return new Client', (done) => {
     chai.request(app)
       .post(basePath)
@@ -50,7 +50,7 @@ describe('01 Test Case create a Client through endpoint client', () => {
   });
 });
 
-describe('02 Test Case edit a Client through endpoint clients/:clientId', () => {
+describe('1.2 Test Case edit a Client through endpoint clients/:clientId', () => {
   it('Should edit and return Client', (done) => {
     chai.request(app)
       .put(`${basePath}/${client.body._id}`)
@@ -68,7 +68,7 @@ describe('02 Test Case edit a Client through endpoint clients/:clientId', () => 
   });
 });
 
-describe('03 Test Case Get Clients by id through endpoint clients/:clientId', () => {
+describe('1.3 Test Case Get Clients by id through endpoint clients/:clientId', () => {
   it('Should retrive Client by id', (done) => {
     chai.request(app)
       .get(`${basePath}/${client.body._id}`)

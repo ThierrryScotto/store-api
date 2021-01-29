@@ -12,7 +12,6 @@ const app = require('../src/index.js');
 
 // constant
 const basePathAddress = '/v1/address';
-const basePathClients = '/v1/clients';
 
 // variables
 let body;
@@ -21,27 +20,7 @@ let body;
 const { client }  = require('./populate/client.populate.js');
 const { address }   = require('./populate/address.populate.js');
 
-describe('01 Test Case create a Client through endpoint client', () => {
-  it('Should create and return new Client', (done) => {
-    chai.request(app)
-      .post(basePathClients)
-      .send(client.body)
-      .then(res => {
-
-        chai.expect(res.statusCode).eq(201);
-        client.body  = res.body.createdClient;
-
-        chai.expect(client.body).to.be.an('object', 'Your body is not an object!');
-
-        done();
-      })
-      .catch(err => {
-        return done(err);
-      })
-  });
-});
-
-describe('02 Test Case create a Address through endpoint Address', () => {
+describe('4.1 Test Case create a Address through endpoint Address', () => {
   it('Should create and return new Address', (done) => {
     address.body.clientId  = client.body._id;
 
@@ -78,7 +57,7 @@ describe('02 Test Case create a Address through endpoint Address', () => {
   });
 });
 
-describe('03 Test Case edit a Address through endpoint address/:address', () => {
+describe('4.2 Test Case edit a Address through endpoint address/:address', () => {
   it('Should edit and return Address', (done) => {
     address.edit.clientId = client.body._id
     
@@ -98,7 +77,7 @@ describe('03 Test Case edit a Address through endpoint address/:address', () => 
   });
 });
 
-describe('04 Test Case Get all Address through endpoint Address', () => {
+describe('4.3 Test Case Get all Address through endpoint Address', () => {
   it('Should retrive All the address registered', (done) => {
     chai.request(app)
       .get(basePathAddress)
@@ -115,7 +94,7 @@ describe('04 Test Case Get all Address through endpoint Address', () => {
   });
 });
 
-describe('05 Test Case Get Address by id through endpoint address/:address', () => {
+describe('4.4 Test Case Get Address by id through endpoint address/:address', () => {
   it('Should retrive Address by id', (done) => {
     chai.request(app)
       .get(`${basePathAddress}/${address.body._id}`)
@@ -146,7 +125,7 @@ describe('05 Test Case Get Address by id through endpoint address/:address', () 
   });
 });
 
-describe('06 Test Case delete a Address through endpoint address/:address', () => {
+describe('4.5 Test Case delete a Address through endpoint address/:address', () => {
   it('Should delete and return a notification', (done) => {
     chai.request(app)
       .delete(`${basePathAddress}/${address.body._id}`)
