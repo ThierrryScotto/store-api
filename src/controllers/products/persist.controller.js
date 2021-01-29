@@ -48,7 +48,7 @@ const _validateEditBody = (body) => {
 };
 
 const createProduct = async (req, res) => {  
-  const postBody = _validateRegisterBody(req.body);
+  const postBody = _validateRegisterBody(req.body, res);
 
   try{
     const createdProduct = await productModel.create(postBody);
@@ -56,7 +56,6 @@ const createProduct = async (req, res) => {
     return res.status(201).send(createdProduct);
     
   } catch (error) {
-    console.error(error);
     res.status(500).send({ message: "internal error" })
   }
 };

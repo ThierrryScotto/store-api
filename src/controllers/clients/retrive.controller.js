@@ -10,7 +10,7 @@ const getClients = async (req, res) => {
     return res.status(404).send({ message: 'Clients not found' });
   }
 
-  res.status(200).send(clientFound);
+  return res.status(200).send(clientFound);
 };
 
 const getClientstById = async (req, res) => {

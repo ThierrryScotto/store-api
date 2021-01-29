@@ -53,7 +53,7 @@ const createAddress = async (req, res) => {
     }
     const adddressCreated = await addressModel.create(postBody);
   
-    return res.status(201).send({ adddressCreated });    
+    return res.status(201).send(adddressCreated);    
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "internal error" })

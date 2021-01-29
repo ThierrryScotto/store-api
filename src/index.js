@@ -18,3 +18,5 @@ router.express.use(`${basePath}`,  client);
 router.express.use(`${basePath}`,  orders);
 router.express.use(`${basePath}`,  address);
 router.express.use(`${basePath}`,  products);
+
+module.exports = router.express;
