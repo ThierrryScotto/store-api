@@ -7,7 +7,7 @@ const cors       = require('cors');
 const bodyParser = require('body-parser');
 const helmet     = require('helmet');
 
-const port = process.env.SERVER_PORT || 3000;
+const port = process.env.SERVER_PORT || 3001;
 
 class AppController {
   constructor() {
