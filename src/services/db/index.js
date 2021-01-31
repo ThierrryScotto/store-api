@@ -10,7 +10,7 @@ class DBClass {
   }
 
   async connection() {
-    await this.mongoose.connect(process.env.DB_CONNECTION, {
+    await this.mongoose.connect('mongodb://localhost:8081/my_database', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
